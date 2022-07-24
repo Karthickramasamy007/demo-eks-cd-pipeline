@@ -11,6 +11,8 @@ node {
             script {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        //To set following credentinals, go to github user profile --> developer settings --> personal access token --> select repo, webhook and notification and generate the token.
+                        //With the token created put in jenkins credintianal with the name github.
                         //def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
                         sh "git config user.email 10cse61@gmail.com"
                         sh "git config user.name Karthickramasamy007"
@@ -21,7 +23,7 @@ node {
                         sh "git add ."
                         sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
                         echo 'Initialised git push...'
-                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/k8-manifiest-repo.git HEAD:main"
+                        sh "git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/demo-eks-cd-pipeline.git HEAD:main"
                         
       }
     }
