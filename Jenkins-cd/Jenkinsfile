@@ -14,7 +14,6 @@ node {
                         //def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
                         sh "git config user.email 10cse61@gmail.com"
                         sh "git config user.name Karthickramasamy007"
-                        sh "git pull origin main"
                         //sh "git switch master"
                         sh "cat deployment.yaml"
                         sh "sed -i 's+mydockeraccfortest/demo_app.*+mydockeraccfortest/demo_app:${DOCKERTAG}+g' deployment.yaml"
