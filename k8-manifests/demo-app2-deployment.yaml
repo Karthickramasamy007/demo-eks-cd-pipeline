@@ -16,8 +16,8 @@ spec:
         app: demo-app2-label
     spec:
       containers:
-        - name: demo-app2-label
-          image: mydockeraccfortest/demo_app2:latest
+        - name: flaskapi
+          image: mydockeraccfortest/demo_app2:latest1
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
