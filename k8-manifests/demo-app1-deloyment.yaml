@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-app2-deploy
+  name: demo-app1-deploy
   labels:
-    app: demo-app2-label
+    app: demo-app1-label
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: demo-app2-label
+      app: demo-app1-label
   template:
     metadata:
       labels:
-        app: demo-app2-label
+        app: demo-app1-label
     spec:
       containers:
-        - name: demo-app2-label
-          image: mydockeraccfortest/demo_app2:latest
+        - name: demo-app1-label
+          image: mydockeraccfortest/demo_app1:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
@@ -26,12 +26,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-app2-service
+  name: demo-app1-service
 spec:
   ports:
   - port: 5000
     protocol: TCP
     targetPort: 5000
   selector:
-    app: demo-app2-label
+    app: demo-app1-label
   type: LoadBalancer
