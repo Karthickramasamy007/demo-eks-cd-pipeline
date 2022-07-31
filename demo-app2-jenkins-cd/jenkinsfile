@@ -10,10 +10,12 @@ node {
     stage('Update demo-app2 cd manifest') {
         
         
-        when {
-                expression { 
-                   return params.DOCKERTAG == '20'
-                }
+        if (params.DOCKERTAG == '20'){
+            echo "++++++++++++++++++ CONDITION WORKS NOW ++++++++++"
+            echo "+++ THE DOCKER TAG IS +++ ${DOCKERTAG}"
+        }
+        else{
+            echo "********** NOT A MATCH TO CONDIGIOTN *********"
         }
     
         steps{
