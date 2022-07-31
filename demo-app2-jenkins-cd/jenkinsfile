@@ -17,7 +17,7 @@ node {
                         sh "git config user.email 10cse61@gmail.com"
                         sh "git config user.name Karthickramasamy007"
                         //sh "git switch master"
-                        sh "cat demo-app2-deployment.yaml"
+                        sh "cat k8manifests/demo-app2-deployment.yaml"
                         sh "sed -i 's+mydockeraccfortest/demo_app2.*+mydockeraccfortest/demo_app2:${DOCKERTAG}+g' demo-app2-deployment.yaml"
                         sh "cat deployment.yaml"
                         sh "git add ."
