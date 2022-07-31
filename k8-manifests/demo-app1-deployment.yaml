@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: demo-app1-label
-          image: mydockeraccfortest/demo_app1:latest
+          image: mydockeraccfortest/demo_app1:latest3
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
