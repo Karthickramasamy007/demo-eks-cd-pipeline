@@ -1,6 +1,14 @@
 node {
     def app
 
+    options {
+    //skipDefaultCheckout(true)
+    
+    // Keep only 5 most recent builds.
+    buildDiscarder(logRotator(numToKeepStr: '5'))
+    timestamps()
+    }
+
     stage('Clone repository') {
       
 
