@@ -8,6 +8,15 @@ node {
     }
 
     stage('Update demo-app2 cd manifest') {
+        
+        
+        when {
+                expression { 
+                   return params.DOCKERTAG == '20'
+                }
+        }
+    
+        steps{
             script {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
@@ -25,8 +34,9 @@ node {
                         echo 'Initialised git push...'
                         sh "git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/demo-eks-cd-pipeline.git HEAD:main"
                         
-      }
+                    }
+                }
+            }
+        }
     }
-  }
-}
 }
