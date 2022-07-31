@@ -1,0 +1,32 @@
+node {
+    def app
+
+    stage('Clone demo-app2 cd repository') {
+      
+
+        checkout scm
+    }
+
+    stage('Update demo-app2 cd manifest') {
+            script {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        //To set following credentinals, go to github user profile --> developer settings --> personal access token --> select repo, webhook and notification and generate the token.
+                        //With the token created put in jenkins credintianal with the name github.
+                        //def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
+                        sh "git config user.email 10cse61@gmail.com"
+                        sh "git config user.name Karthickramasamy007"
+                        //sh "git switch master"
+                        sh "cat deployment.yaml"
+                        sh "sed -i 's+mydockeraccfortest/demo_app2.*+mydockeraccfortest/demo_app2:${DOCKERTAG}+g' deployment.yaml"
+                        sh "cat deployment.yaml"
+                        sh "git add ."
+                        sh "git commit -m 'Done by Jenkins Job change manifest: ${env.BUILD_NUMBER}'"
+                        echo 'Initialised git push...'
+                        sh "git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/demo-eks-cd-pipeline.git HEAD:main"
+                        
+      }
+    }
+  }
+}
+}
