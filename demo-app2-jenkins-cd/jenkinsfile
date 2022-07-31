@@ -9,16 +9,9 @@ node {
 
     stage('Update demo-app2 cd manifest') {
         
-        
-        if (params.DOCKERTAG == '20'){
-            echo "++++++++++++++++++ CONDITION WORKS NOW ++++++++++"
-            echo "+++ THE DOCKER TAG IS +++ ${DOCKERTAG}"
-        }
-        else{
-            echo "********** NOT A MATCH TO CONDIGIOTN *********"
-        }
-    
-        steps{
+        //Choose manifies file and update based on the 'SERVICE_NAME'
+        if (params.SERVICE_NAME == 'demo-app2'){
+
             script {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
@@ -39,6 +32,13 @@ node {
                     }
                 }
             }
+
         }
+
+        else{
+            echo "********** WARNING : PARAMETER 'SERVICE_NAME' NOT MATCHING SERVICE! NO MANIFESTS ARE UPDATED!! *************"
+        }
+    
+            
     }
 }
