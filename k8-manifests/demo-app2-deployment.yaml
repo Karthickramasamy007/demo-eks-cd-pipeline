@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flaskapi
-          image: mydockeraccfortest/demo_app2:16
+          image: mydockeraccfortest/demo_app2:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
